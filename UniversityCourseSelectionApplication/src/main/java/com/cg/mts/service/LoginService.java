@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.mts.entities.Login;
-import com.cg.mts.repository.ILoginRepository;
+import com.cg.mts.repository.LoginRepository;
 @Service
-public class LoginServiceImpl{ //doubt!
+public class LoginService{ //doubt!
 	@Autowired
-	ILoginRepository lrRep;
+	LoginRepository lrRep;
 
 	public boolean verifyUniversityStaffMemberCredentials(int staffId, String password) {
 		return lrRep.existsById(staffId);

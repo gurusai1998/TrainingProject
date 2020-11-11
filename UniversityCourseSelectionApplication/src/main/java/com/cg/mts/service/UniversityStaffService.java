@@ -1,21 +1,19 @@
 package com.cg.mts.service;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.mts.entities.Course;
 import com.cg.mts.entities.UniversityStaffMember;
 import com.cg.mts.exceptions.CourseNotFoundException;
-import com.cg.mts.repository.ICourseRepository;
-import com.cg.mts.repository.IUniversityStaffRepository;
+import com.cg.mts.repository.CourseRepository;
+import com.cg.mts.repository.UniversityStaffRepository;
 @Service
-public class UniversityStaffServiceImpl{
+public class UniversityStaffService{
 	@Autowired
-	IUniversityStaffRepository usrRep;
-	ICourseRepository crRep;
+	UniversityStaffRepository usrRep;
+	CourseRepository crRep;
 	
 
 	public UniversityStaffMember addStaff(UniversityStaffMember user) {
@@ -28,8 +26,8 @@ public class UniversityStaffServiceImpl{
 		return usrRep.save(user);
 	}
 
-	public Optional<UniversityStaffMember> viewStaff(int staffid) {
-		return usrRep.findById(staffid);
+	public UniversityStaffMember viewStaff(int staffid) {
+		return usrRep.viewstaff(staffid);
 	}
 
 	public void removeStaff(int staffid) {

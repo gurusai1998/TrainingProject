@@ -1,5 +1,6 @@
 package com.cg.mts.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,14 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.mts.entities.Admission;
 import com.cg.mts.exceptions.AdmissionNotGrantedException;
-import com.cg.mts.service.AdmissionServiceImpl;
+import com.cg.mts.service.AdmissionService;
 
 @RestController
 public class AdmissionController {
-	
+
 	@Autowired
-	public AdmissionServiceImpl admServ;
-	
+	public AdmissionService admServ;
+
 	@PostMapping("/addingadmissiondetails")
 	public ResponseEntity<Admission> addingAdmissionDetails(@RequestBody Admission admission) throws AdmissionNotGrantedException
 	{
@@ -36,21 +37,21 @@ public class AdmissionController {
 		Admission result=admServ.updateAdmission(admission);
 		return new ResponseEntity<Admission>(result,HttpStatus.OK);
 	}
-	@GetMapping("/cancellingadmission/{id}")
+	@DeleteMapping("/cancellingadmission/{id}")
 	public void cancellingAdmission(@PathVariable int admissionId) throws AdmissionNotGrantedException
 	{
 		admServ.cancelAdmission(admissionId);
-//		return new ResponseEntity<Admission>(result.get(),HttpStatus.OK);
+		//return new ResponseEntity<Admission>(result.get(),HttpStatus.OK);
 	}
 	@GetMapping("/showalladmissiondetailsbycourseid/{id}")
-	public Optional<Admission> showAllAdmissionsByCourseId(@PathVariable int id)
+	public Admission showAllAdmissionsByCourseId(@PathVariable int id)
 	{
-		Optional<Admission> result=admServ.showAllAdmissionsByCourseId(id);
+		Admission result=admServ.showAllAdmissionsByCourseId(id);
 		return result;
 	}
-	@DeleteMapping("/showalladmissiondetailsbydate/{id}") //doubt!S
-	public List<Admission> showAllAdmissionsByDate(@PathVariable Iterable<Integer> id)
+	@GetMapping("/showalladmissiondetailsbydate/{date}") //doubt!
+	public Admission showAllAdmissionsByDate(@PathVariable LocalDate date)
 	{
-		return admServ.showAllAdmissionsByDate(id);
+		return admServ.showAllAdmissionsByDate(date);
 	}
 }

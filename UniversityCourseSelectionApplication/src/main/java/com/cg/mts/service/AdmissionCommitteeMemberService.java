@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.mts.entities.AdmissionCommiteeMember;
-import com.cg.mts.repository.IAdmissionCommiteeMemberRepository;
+import com.cg.mts.repository.AdmissionCommiteeMemberRepository;
 
 @Service
-public class AdmissionCommitteeMemberServiceImpl{
+public class AdmissionCommitteeMemberService{
 	@Autowired
-	IAdmissionCommiteeMemberRepository acmr;
+	AdmissionCommiteeMemberRepository acmr;
 
 	public AdmissionCommiteeMember addCommiteeMember(AdmissionCommiteeMember member) {
 
@@ -28,8 +28,8 @@ public class AdmissionCommitteeMemberServiceImpl{
 		}
 	}
 
-	public Optional<AdmissionCommiteeMember> viewCommiteeMember(int adminId) {
-		return acmr.findById(adminId);
+	public List<AdmissionCommiteeMember> viewCommiteeMember(int adminId) {
+		return (List<AdmissionCommiteeMember>)acmr.findById(adminId);
 	}
 
 	public void removeCommiteeMember(int adminId) {

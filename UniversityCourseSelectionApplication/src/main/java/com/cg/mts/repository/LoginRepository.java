@@ -4,6 +4,6 @@ import com.cg.mts.entities.Login;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ILoginRepository extends JpaRepository<Login, Integer>{
+public interface LoginRepository extends JpaRepository<Login, Integer>{
 
 }

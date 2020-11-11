@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.cg.mts.entities.Course;
 import com.cg.mts.exceptions.CourseNotFoundException;
-import com.cg.mts.repository.ICourseRepository;
+import com.cg.mts.repository.CourseRepository;
 @Service
-public class CourseServiceImpl{
+public class CourseService{
 	@Autowired
-	ICourseRepository crRep;
+	CourseRepository crRep;
 
 	public Course addCourse(Course course) {
 		return crRep.save(course);
@@ -26,8 +26,8 @@ public class CourseServiceImpl{
 		return crRep.save(course);
 	}
 
-	public Optional<Course> viewCourse(int courseid) throws CourseNotFoundException {//doubt!
-		return crRep.findById(courseid);
+	public Course viewCourse(int courseid) throws CourseNotFoundException {//doubt!
+		return crRep.findById(courseid).orElse(null);
 	}
 
 	public List<Course> viewAllCourses() {

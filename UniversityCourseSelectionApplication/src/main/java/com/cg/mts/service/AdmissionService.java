@@ -1,5 +1,6 @@
 package com.cg.mts.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,15 +9,15 @@ import org.springframework.stereotype.Service;
 
 import com.cg.mts.entities.Admission;
 import com.cg.mts.exceptions.AdmissionNotGrantedException;
-import com.cg.mts.repository.IAdmissionRepository;
+import com.cg.mts.repository.AdmissionRepository;
 @Service
-    public class AdmissionServiceImpl {
+    public class AdmissionService {
 	@Autowired
-	IAdmissionRepository admRep;
+	AdmissionRepository admRep;
 
 	public Admission addAdmission(Admission admission) throws AdmissionNotGrantedException {
-		Admission adm=admRep.save(admission);
-		return adm;
+		return admRep.save(admission);
+		
 	}
 
 	public Admission updateAdmission(Admission admission) throws AdmissionNotGrantedException {
@@ -29,13 +30,13 @@ import com.cg.mts.repository.IAdmissionRepository;
 		admRep.deleteById(admissionId);
 	}
 
-	public Optional<Admission> showAllAdmissionsByCourseId(int courseId) {
+	public Admission showAllAdmissionsByCourseId(int courseId) {
 		// TODO Auto-generated method stub
 		return admRep.findById(courseId);
 	}
 
-	public List<Admission> showAllAdmissionsByDate(Iterable<Integer> admissionDate) { // Doubt!
-		return admRep.findAllById(admissionDate);
+	public Admission showAllAdmissionsByDate(LocalDate admissionDate) { // Doubt!
+		return admRep.findAllByDate(admissionDate);
 	}
 
 }
